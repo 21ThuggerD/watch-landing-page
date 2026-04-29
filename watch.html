@@ -1,0 +1,776 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orion Timepieces | Luxury Watches</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070707;
+      --panel: rgba(14, 14, 14, 0.94);
+      --surface: #111111;
+      --text: #f5f1eb;
+      --subtext: #b5a78e;
+      --accent: #c19c6d;
+      --accent-soft: rgba(193, 156, 109, 0.18);
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at top left, rgba(193, 156, 109, 0.14), transparent 30%),
+                  radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.03), transparent 22%),
+                  var(--bg);
+      color: var(--text);
+    }
+
+    body {
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    .page {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 36px 24px 48px;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: grid;
+      grid-template-rows: auto auto;
+      align-items: start;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+      font-size: 1rem;
+      text-shadow: 0 2px 10px rgba(193, 156, 109, 0.35);
+      width: max-content;
+    }
+
+    .brand-mark {
+      width: 440px;
+      height: 440px;
+      border-radius: 22px;
+      display: block;
+      object-fit: contain;
+      box-shadow: 0 16px 56px rgba(193, 156, 109, 0.22);
+    }
+
+    .brand-name {
+      margin: 0;
+      font-size: 2.56rem;
+      line-height: 1.02;
+      letter-spacing: 0.18em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      color: var(--subtext);
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.22s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: start;
+      margin-bottom: 52px;
+    }
+
+    .hero-copy {
+      max-width: 640px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-size: 0.82rem;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 44px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 5vw, 4.6rem);
+      line-height: 0.95;
+      margin: 0 0 26px;
+      letter-spacing: -0.04em;
+    }
+
+    p.lead {
+      margin: 0 0 34px;
+      color: var(--subtext);
+      max-width: 38rem;
+      font-size: 1.06rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .button,
+    .button-secondary {
+      border: 1px solid transparent;
+      border-radius: 14px;
+      padding: 16px 26px;
+      font-size: 0.99rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button {
+      background: linear-gradient(135deg, rgba(193, 156, 109, 0.96), rgba(255, 255, 255, 0.18));
+      color: #111;
+      box-shadow: 0 18px 40px rgba(193, 156, 109, 0.16);
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .button-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 540px;
+      border-radius: 32px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(254, 250, 242, 0.04), transparent 50%),
+                  linear-gradient(120deg, rgba(193, 156, 109, 0.16), transparent 30%),
+                  radial-gradient(circle at top right, rgba(255, 255, 255, 0.12), transparent 30%),
+                  var(--surface);
+      box-shadow: var(--shadow);
+      padding: 40px;
+      display: grid;
+      align-items: end;
+    }
+
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.02), transparent 35%);
+      pointer-events: none;
+    }
+
+    .watch-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      margin-left: auto;
+      padding: 28px;
+      background: rgba(16, 16, 16, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 32px;
+      display: grid;
+      gap: 22px;
+      backdrop-filter: blur(18px);
+    }
+
+    .watch-card img {
+      width: 100%;
+      border-radius: 24px;
+      display: block;
+    }
+
+    .watch-card h2 {
+      margin: 0;
+      font-size: 1.65rem;
+    }
+
+    .watch-card span {
+      color: var(--accent);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .feature strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.96rem;
+      color: var(--text);
+    }
+
+    .feature span {
+      color: var(--subtext);
+      font-size: 0.91rem;
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.85rem;
+    }
+
+    .section-title a {
+      font-size: 0.95rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .product {
+      background: var(--panel);
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+      position: relative;
+      display: grid;
+      gap: 14px;
+    }
+
+    .product img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 1 / 0.95;
+      object-fit: cover;
+    }
+
+    .product-body {
+      padding: 22px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .product-title {
+      margin: 0;
+      font-size: 1.18rem;
+    }
+
+    .product-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--subtext);
+      font-size: 0.94rem;
+    }
+
+    .product-description {
+      margin: 0;
+      color: var(--text);
+      opacity: 0.86;
+      font-size: 0.98rem;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .product-footer button {
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, rgba(193, 156, 109, 0.96), rgba(255, 255, 255, 0.12));
+      color: #111;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s ease;
+    }
+
+    .product-footer button:hover {
+      transform: translateY(-1px);
+    }
+
+    .cart-panel {
+      position: relative;
+      width: 100%;
+      background: rgba(12, 12, 12, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 32px;
+      padding: 32px;
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 24px;
+      overflow: hidden;
+    }
+
+    .cart-panel h3 {
+      margin: 0;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cart-panel .cart-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .cart-panel .cart-summary {
+      max-width: 640px;
+      margin: 0;
+      color: var(--subtext);
+      line-height: 1.65;
+      font-size: 0.98rem;
+    }
+
+    .cart-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--subtext);
+      font-size: 0.95rem;
+    }
+
+    .cart-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: grid;
+      gap: 16px;
+      overflow-y: auto;
+      max-height: 340px;
+      padding-right: 6px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .cart-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .cart-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      display: grid;
+      gap: 6px;
+    }
+
+    .cart-item-title {
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .cart-item-meta {
+      margin: 0;
+      color: var(--subtext);
+      font-size: 0.88rem;
+    }
+
+    .cart-item-actions {
+      display: grid;
+      gap: 8px;
+      justify-items: end;
+    }
+
+    .cart-item-actions button {
+      border: none;
+      background: transparent;
+      color: var(--subtext);
+      cursor: pointer;
+      font-size: 0.88rem;
+      padding: 6px;
+      border-radius: 10px;
+    }
+
+    .cart-item-actions button:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .cart-footer {
+      display: grid;
+      gap: 14px;
+    }
+
+    .cart-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+    }
+
+    .checkout {
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(193, 156, 109, 0.96), rgba(255, 255, 255, 0.18));
+      color: #111;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .checkout:hover {
+      transform: translateY(-1px);
+    }
+
+    .cart-empty {
+      color: var(--subtext);
+      font-size: 0.96rem;
+      margin: 0;
+    }
+
+    .notification {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10, 10, 10, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 14px 22px;
+      color: var(--text);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease, transform 0.24s ease;
+      z-index: 12;
+    }
+
+    .notification.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-8px);
+      pointer-events: auto;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-visual {
+        min-height: 420px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <img class="brand-mark" src="assets/orion-logo.png" alt="Orion Logo" />
+        <p class="brand-name">Orion Timepieces</p>
+      </div>
+      <nav class="nav">
+        <a href="#collection">Collection</a>
+        <a href="#story">Story</a>
+        <a href="#craft">Craft</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Premium Timepieces</span>
+        <h1>Where minimal refinement meets contemporary watchmaking.</h1>
+        <p class="lead">Experience a curated edit of mechanical classics and modern luxury watches designed for collectors who value timeless finishes, rare materials, and exceptional detail.</p>
+        <div class="hero-actions">
+          <button class="button" type="button" onclick="scrollToSection('collection')">Explore collection</button>
+          <button class="button-secondary" type="button" onclick="document.getElementById('cart').scrollIntoView({ behavior: 'smooth' })">View cart</button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="watch-card">
+          <span>Signature edition</span>
+          <h2>Orion Tourbillon</h2>
+          <img src="assets/orion-tourbillon.png" alt="Orion Tourbillon watch" />
+          <div class="features">
+            <div class="feature">
+              <strong>Swiss movement</strong>
+              <span>Precision automatic calibre with 72-hour power reserve</span>
+            </div>
+            <div class="feature">
+              <strong>Brushed gold</strong>
+              <span>18k rose-gold bezel paired with midnight dial</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="collection" class="section">
+      <div class="section-title">
+        <h2>Featured timepieces</h2>
+        <a href="#cart">Refine your selection</a>
+      </div>
+      <div class="products" id="productGrid">
+        <!-- Products inserted by JavaScript -->
+      </div>
+    </section>
+
+    <section id="cart" class="section cart-panel">
+      <div class="cart-header">
+        <div>
+          <h3>Cart</h3>
+          <p class="cart-summary">Your watch selection is safe here until you're ready to check out.</p>
+        </div>
+        <div class="cart-summary" style="text-align:right; min-width:220px;">Review your selection, adjust quantities, and enjoy a refined checkout experience.</div>
+      </div>
+      <ul class="cart-list" id="cartList"></ul>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total</span>
+          <strong id="cartTotal">$0.00</strong>
+        </div>
+        <button class="checkout" type="button" id="checkoutButton">Proceed to checkout</button>
+      </div>
+    </section>
+
+    <section id="story" class="section">
+      <div class="section-title">
+        <h2>Crafted for quiet moments</h2>
+      </div>
+      <p style="max-width: 760px; color: var(--subtext); margin: 0; font-size: 1.02rem;">Æther Horology blends contemporary design with heritage watchmaking, bringing a discreet sense of luxury to everyday wear. Each piece is selected for its storytelling potential, refined silhouettes, and tactile finishes that reveal depth in every glance.</p>
+    </section>
+  </div>
+
+  <div class="notification" id="notification"></div>
+
+  <script>
+    const products = [
+      {
+        id: 1,
+        name: 'Orion Tourbillon',
+        category: 'Signature edition',
+        price: 13400,
+        image: 'assets/orion-tourbillon.png'
+      },
+      {
+        id: 2,
+        name: 'Luxe Day-Date',
+        category: 'Executive collection',
+        price: 9870,
+        image: 'assets/luxe-day-date.jpeg'
+      },
+      {
+        id: 3,
+        name: 'Velour Chronograph',
+        category: 'Racing edition',
+        price: 7620,
+        image: 'assets/velour-chronograph.jpeg'
+      },
+      {
+        id: 4,
+        name: 'Nocturne Minimal',
+        category: 'Midnight series',
+        price: 5400,
+        image: 'assets/nocturne-minimal.jpeg'
+      }
+    ];
+
+    const cart = [];
+    const productGrid = document.getElementById('productGrid');
+    const cartList = document.getElementById('cartList');
+    const cartTotal = document.getElementById('cartTotal');
+    const notification = document.getElementById('notification');
+    const checkoutButton = document.getElementById('checkoutButton');
+
+    function formatCurrency(value) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+    }
+
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.classList.add('visible');
+      clearTimeout(notification.hideTimeout);
+      notification.hideTimeout = setTimeout(() => {
+        notification.classList.remove('visible');
+      }, 2400);
+    }
+
+    function renderProducts() {
+      productGrid.innerHTML = products.map(product => `
+        <article class="product">
+          <img src="${product.image}" alt="${product.name}" />
+          <div class="product-body">
+            <div class="product-meta">${product.category}</div>
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-description">A refined companion built for precision, minimalism, and effortless presence.</p>
+            <div class="product-footer">
+              <span>${formatCurrency(product.price)}</span>
+              <button type="button" onclick="addToCart(${product.id})">Add to cart</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function renderCart() {
+      if (!cart.length) {
+        cartList.innerHTML = '<li class="cart-empty">Your cart is empty. Add a watch to see it here.</li>';
+        cartTotal.textContent = formatCurrency(0);
+        return;
+      }
+
+      cartList.innerHTML = cart.map(item => `
+        <li class="cart-item">
+          <div class="cart-thumb"><img src="${item.image}" alt="${item.name}" /></div>
+          <div class="cart-item-info">
+            <p class="cart-item-title">${item.name}</p>
+            <p class="cart-item-meta">${item.category} • ${item.quantity}× ${formatCurrency(item.price)}</p>
+          </div>
+          <div class="cart-item-actions">
+            <button type="button" onclick="removeFromCart(${item.id})">Remove</button>
+          </div>
+        </li>
+      `).join('');
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      cartTotal.textContent = formatCurrency(total);
+    }
+
+    function addToCart(productId) {
+      const product = products.find(item => item.id === productId);
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      renderCart();
+      showNotification(`${product.name} added to cart.`);
+    }
+
+    function removeFromCart(productId) {
+      const index = cart.findIndex(item => item.id === productId);
+      if (index >= 0) {
+        const removed = cart.splice(index, 1)[0];
+        renderCart();
+        showNotification(`${removed.name} removed.`);
+      }
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    checkoutButton.addEventListener('click', () => {
+      showNotification('Checkout is reserved for a refined experience — available soon.');
+    });
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
